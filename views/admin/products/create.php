@@ -190,6 +190,58 @@
         padding: 5%;
       }
     }
+    .form select {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 2%;
+  padding: 3%;
+  margin-bottom: 5%;
+  font-size: 95%;
+  transition: 0.3s;
+}
+
+.form select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52,152,219,0.4);
+  transform: scale(1.02);
+}
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.genre-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.genre-item input[type="checkbox"] {
+  display: none; /* Ẩn checkbox mặc định */
+}
+
+.genre-item span {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 2px solid #3498db;
+  border-radius: 20px;
+  font-size: 90%;
+  background: #fff;
+  color: #3498db;
+  transition: 0.3s;
+  user-select: none;
+}
+
+.genre-item input[type="checkbox"]:checked + span {
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  color: #fff;
+  border-color: #2ecc71;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+}
+
+
   </style>
 </head>
 <body>
@@ -215,8 +267,14 @@
     <div class="form">
       <form action="/QLBanHang/admin.php?page=product&action=create" method="POST" enctype="multipart/form-data">
         <p>
-          <label for="name">ID danh mục</label>
-          <input id="name" name="idDM" type="text" placeholder="Nhập id danh mục..."> 
+          <label for="name">Danh mục</label>
+          <select name="idDM" id="">
+            <?php foreach ($category as $cate): ?>
+                <option value="<?= $cate['id'] ?>">
+                <?= htmlspecialchars($cate['name']) ?>
+                </option>
+            <?php endforeach; ?>
+          </select>
         </p>
         <p>
           <label for="name">Tên sản phẩm</label>
@@ -233,10 +291,23 @@
         <p>
           <label for="description">Mô tả</label>
           <textarea id="description" name="description" rows="4" placeholder="Nhập mô tả sản phẩm..."></textarea>
+        </p> 
+        <p>
+          <label>Thể loại</label><br>
+          <div class="genres">
+            <?php foreach ($genres as $genre): ?>
+              <label class="genre-item">
+                <input type="checkbox" name="genres[]" value="<?= $genre['id'] ?>">
+                <span><?= htmlspecialchars($genre['genre_name']) ?></span>
+              </label>
+            <?php endforeach; ?>
+          </div>
         </p>
         <p>
           <button type="submit"><i class="fa fa-plus"></i> Tạo mới</button>
         </p>
+
+
       </form>
     </div>
   </div>

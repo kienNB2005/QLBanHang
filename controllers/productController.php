@@ -19,6 +19,8 @@
         }
 
         function displayInfo(){
+            $genres = $this ->modelProducts->getGenre();
+            $category = $this->modelProducts->getCategory();
             include "views/admin/products/create.php";
         }
         function create()  {
@@ -27,14 +29,15 @@
                 $name = $_POST['name'];
                 $price = $_POST['price'];
                 $description = $_POST['description'];
-
+                $genres = $_POST['genres'] ?? [];
                 $target_dir = "uploads/";
                 $target_file = $target_dir .basename($_FILES["image"]["name"]);
                 move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-                $result = $this->modelProducts->store($idDM,$name, $price,$target_file,$description);
+                $product_id = $this->modelProducts->store($idDM,$name, $price,$target_file,$description);
             }
             
-            if ($result){
+            if ($product_id){
+                $this->modelProducts->storeProduct_genre($genres,$product_id);
                 echo "Thêm mới thành công 
                 <a href='/QLBanHang/admin.php?page=product&action=index'>danh sách</a>
                 ";
@@ -53,13 +56,15 @@
                 $name = $_POST['name'];
                 $price = $_POST['price'];
                 $description = $_POST['description'];
-
+                $genres = $_POST['genres'] ?? [];
                 $target_dir = "uploads/";
                 $target_file = $target_dir .basename($_FILES["image"]["name"]);
                 move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
                 $result = $this->modelProducts->update($id, $idDM,$name, $price,$target_file,$description);
-
+                $this->modelProducts->deleteGenre_product($id);
+                $this->modelProducts->storeProduct_genre($genres,$id);
                 if ($result) {
+                    
                     echo "Cập nhật thành công 
                         <a href='/QLBanHang/admin.php?page=product&action=index'>Danh sách</a>";
                     die;
@@ -67,6 +72,9 @@
             } else {
                 // lần đầu mở form
                 $id = $_GET['id'];
+                $currentGenres = $this->modelProducts->getCurrentGenreById($id);
+                $allGenres = $this->modelProducts->getGenre();
+                $category = $this->modelProducts->getCategory();
                 $data = $this->modelProducts-> getById($id);
                 include "views/admin/products/edit.php";
             }

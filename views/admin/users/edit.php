@@ -193,6 +193,23 @@
             font-size: 95%;
         }
     }
+
+        .form select {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 2%;
+  padding: 3%;
+  margin-bottom: 5%;
+  font-size: 95%;
+  transition: 0.3s;
+}
+
+.form select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52,152,219,0.4);
+  transform: scale(1.02);
+}
   </style>
 </head>
 <body>

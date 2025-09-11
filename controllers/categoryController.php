@@ -35,7 +35,7 @@
             }
         }
         function edit() {
-            if ($_SESSION['user']['role'] != 'admin') {
+            if ($_SESSION['user']['role_id'] != 1) {
             echo "Bạn không có quyền chỉnh sửa!";
             return;
             }
@@ -61,7 +61,7 @@
 
 
         function delete()  {
-            if ($_SESSION['user']['role'] != 'admin') {
+            if ($_SESSION['user']['role_id'] != 1) {
             echo "Bạn không có quyền chỉnh sửa!";
             return;
             }

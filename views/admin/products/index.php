@@ -230,7 +230,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>ID Danh mục</th>
+              <th>Danh mục</th>
               <th>Tên sản phẩm</th>
               <th>Giá</th>
               <th>Hình ảnh</th>
@@ -243,7 +243,7 @@
                 <?php foreach ($datas as $data): ?>
                     <tr>
                         <td><?= $data['id'] ?></td>
-                        <td><?= $data['category_id'] ?></td>
+                        <td><?= $data['category_name'] ?></td>
                         <td><?= htmlspecialchars($data['name']) ?></td>
                         <td><?= $data['price'] ?></td>
                         <td> <img src="<?= $data['images'] ?>" alt="" class="comic-img"></td>

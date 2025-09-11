@@ -193,6 +193,55 @@
             font-size: 95%;
         }
     }
+  select {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 2%;
+  padding: 3%;
+  margin-bottom: 5%;
+  font-size: 95%;
+  transition: 0.3s;
+}
+  select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52,152,219,0.4);
+  transform: scale(1.02);
+}
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.genre-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.genre-item input[type="checkbox"] {
+  display: none; /* Ẩn checkbox mặc định */
+}
+
+.genre-item span {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 2px solid #3498db;
+  border-radius: 20px;
+  font-size: 90%;
+  background: #fff;
+  color: #3498db;
+  transition: 0.3s;
+  user-select: none;
+}
+
+.genre-item input[type="checkbox"]:checked + span {
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  color: #fff;
+  border-color: #2ecc71;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+}
   </style>
 </head>
 <body>
@@ -218,8 +267,23 @@
     <form method="POST" action="/QLBanHang/admin.php?page=product&action=edit" enctype="multipart/form-data">
       <input type="hidden" name="id" value="<?= $data['id'] ?>">
       <div>
-          <label for="name">ID danh mục</label>
-          <input id="name" name="idDM" value="<?= $data['category_id'];?>"> 
+          <label for="name">Danh mục</label>
+          <?php $Current = $data['category_id'];?>
+          <select name="idDM" id="">
+            <?php foreach ($category as $cate): ?>
+                <?php if ($Current == $cate['id']): ?>
+                  <option value="<?= $cate['id'] ?>" selected>
+                    <?= htmlspecialchars($cate['name']) ?>
+                  </option>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
+            <?php foreach ($category as $cate): ?>
+                <option value="<?= $cate['id'] ?>">
+                <?= htmlspecialchars($cate['name']) ?>
+                </option>
+            <?php endforeach; ?>
+          </select> 
       </div>
       <div>
         <label for="name">Tên sản phẩm</label>
@@ -227,7 +291,7 @@
       </div>
       <div>
         <label for="name">Giá</label>
-        <input id="name" name="price" value="<?= $data['price'];?>">
+        <input type="text" name="price" value="<?= $data['price'];?>">
       </div>
       <div>
         <label for="name">Hình ảnh</label>
@@ -237,6 +301,21 @@
         <label for="description">Mô tả</label>
         <textarea name="description" rows="4"><?= htmlspecialchars($data['description']); ?></textarea>
       </div>
+    <div>
+      <label for="genres">Thể loại</label>
+      <div class="genres">
+        <?php foreach ($allGenres as $genre): ?>
+          <?php 
+            // kiểm tra thể loại hiện tại của sản phẩm
+            $checked = in_array($genre['id'], $currentGenres) ? 'checked' : '';?>
+          <label class="genre-item">
+            <input type="checkbox" name="genres[]" value="<?= $genre['id'] ?>" <?= $checked ?>>
+            <span><?= htmlspecialchars($genre['genre_name']); ?></span>
+          </label>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
       <button type="submit"><i class="fa fa-save"></i> Cập nhật</button>
     </form>
   </div>
