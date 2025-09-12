@@ -200,19 +200,19 @@
 
   <!-- Nội dung chính -->
   <div class="content">
-    <h3>📂 Quản lý Danh mục</h3>
+    <h3>📂 Quản lý thể loại</h3>
 
     <!-- Nút thêm mới -->
     <div class="mb-3">
-      <a href="/QLBanHang/admin.php?page=category&action=displayInfo">
-        <i class="fa fa-plus"></i> Thêm danh mục 
+      <a href="/QLBanHang/admin.php?page=genre&action=displayInfo">
+        <i class="fa fa-plus"></i> Thêm thể loại 
       </a>
     </div>
 
       <!-- Thanh tìm kiếm -->
     <form method="GET" action="/QLBanHang/admin.php" class="mb-3 d-flex" style="max-width: 400px;">
       <!-- Giữ nguyên các tham số cần thiết -->
-      <input type="hidden" name="page" value="category">
+      <input type="hidden" name="page" value="genre">
       <input type="hidden" name="action" value="index">
 
       <input type="text" name="keyword" class="form-control me-2" 
@@ -228,7 +228,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>Tên danh mục</th>
+              <th>Tên thể loại</th>
               <th>Mô tả</th>
               <th>Thao tác</th>
             </tr>
@@ -238,13 +238,13 @@
                 <?php foreach ($datas as $data): ?>
                     <tr>
                         <td><?= $data['id'] ?></td>
-                        <td><?= htmlspecialchars($data['name']) ?></td>
+                        <td><?= htmlspecialchars($data['genre_name']) ?></td>
                         <td><?= substr($data['description'], 0, 50) ?></td>
                         <td>
-                            <a href="/QLBanHang/admin.php?page=category&action=edit&id=<?= $data['id'] ?>" 
+                            <a href="/QLBanHang/admin.php?page=genre&action=edit&id=<?= $data['id'] ?>" 
                               class="btn btn-sm btn-warning">Sửa</a>
 
-                            <form method="POST" action="/QLBanHang/admin.php?page=category&action=delete" style="display:inline;">
+                            <form method="POST" action="/QLBanHang/admin.php?page=genre&action=delete" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= $data['id'] ?>">
                                 <button type="submit" class="btn btn-sm btn-danger" 
                                         onclick="return confirm('Bạn có chắc muốn xóa?');">Xóa</button>
@@ -271,13 +271,13 @@
 
             <?php for ($i = 1; $i <= $totalPage; $i++): ?>
               <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                <a class="page-link" href="/QLBanHang/admin.php?page=category&action=index&p=<?= $i ?>"><?= $i ?></a>
+                <a class="page-link" href="/QLBanHang/admin.php?page=genre&action=index&p=<?= $i ?>"><?= $i ?></a>
               </li>
             <?php endfor; ?>
 
             <?php if ($page < $totalPage): ?>
               <li class="page-item">
-                <a class="page-link" href="/QLBanHang/admin.php?page=category&action=index&p=<?= $page + 1 ?>">»</a>
+                <a class="page-link" href="/QLBanHang/admin.php?page=genre&action=index&p=<?= $page + 1 ?>">»</a>
               </li>
             <?php endif; ?>
           </ul>

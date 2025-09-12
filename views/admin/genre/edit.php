@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Quản lý Truyện Tranh</title>
+  <title>Admin - Chỉnh sửa Danh mục</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -25,7 +25,6 @@
       color: white;
       padding: 5% 0;
       box-shadow: 2px 0 10px rgba(0,0,0,0.25);
-      animation: slideInLeft 0.6s ease;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
@@ -86,7 +85,6 @@
       width: 80%;
       padding: 3% 5%;
       overflow-y: auto;
-      animation: fadeIn 0.8s ease;
     }
 
     .themdanhmuc {
@@ -96,7 +94,6 @@
       border-radius: 2%;
       margin-bottom: 5%;
       box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-      animation: fadeDown 0.8s ease;
     }
 
     .themdanhmuc h2 {
@@ -106,89 +103,95 @@
       letter-spacing: 0.5px;
     }
 
-    .form {
-      background: #fff;
-      padding: 4% 5%;
-      border-radius: 2%;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-      width: 100%;
-      max-width: 90%;
-      animation: fadeUp 0.8s ease;
+    /* Form chỉnh sửa */
+    form {
+        width: 100%;
+        max-width: 90%;
+        background: #fff;
+        padding: 4% 5%;
+        border-radius: 2%;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        font-family: 'Segoe UI', sans-serif;
+        animation: fadeUp 0.8s ease;
+        margin: 0 auto;
+        box-sizing: border-box;
     }
 
-    .form label {
-      font-weight: 600;
-      margin-bottom: 2%;
-      display: block;
+    form div {
+        margin-bottom: 5%;
     }
 
-    .form input, .form textarea {
-      width: 100%;
-      border: 1px solid #ddd;
-      border-radius: 2%;
-      padding: 3%;
-      margin-bottom: 5%;
-      font-size: 95%;
-      transition: 0.3s;
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 2%;
+        color: #333;
+        font-size: 95%;
     }
 
-    .form input:focus, .form textarea:focus {
-      outline: none;
-      border-color: #3498db;
-      box-shadow: 0 0 8px rgba(52,152,219,0.4);
-      transform: scale(1.02);
+    input[type="text"],
+    textarea {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 2%;
+        padding: 3%;
+        font-size: 95%;
+        transition: 0.3s;
+        box-sizing: border-box;
     }
 
-    .form button {
-      background: linear-gradient(135deg, #3498db, #2ecc71);
-      color: white;
-      padding: 3% 6%;
-      border: none;
-      border-radius: 2%;
-      font-size: 100%;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    input[type="text"]:focus,
+    textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 8px rgba(52,152,219,0.4);
+        transform: scale(1.02);
     }
 
-    .form button:hover {
-      background: linear-gradient(135deg, #2980b9, #27ae60);
-      transform: translateY(-6%);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    button[type="submit"] {
+        background: linear-gradient(135deg, #3498db, #2ecc71);
+        color: white;
+        padding: 3% 6%;
+        border: none;
+        border-radius: 2%;
+        font-size: 100%;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    /* Animation */
-    @keyframes slideInLeft {
-      from { transform: translateX(-100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    button[type="submit"]:hover {
+        background: linear-gradient(135deg, #2980b9, #27ae60);
+        transform: translateY(-6%);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+
     @keyframes fadeUp {
-      from { transform: translateY(20%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fadeDown {
-      from { transform: translateY(-20%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+        from { transform: translateY(20%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      .sidebar {
-        width: 100%;
-        height: auto;
-        padding: 3% 0;
-      }
-      .content {
-        width: 100%;
-        padding: 5%;
-      }
+        body {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+            height: auto;
+            padding: 3% 0;
+        }
+        .content {
+            width: 100%;
+            padding: 5%;
+        }
+        form {
+            padding: 5%;
+            max-width: 95%;
+        }
+        button[type="submit"] {
+            padding: 4% 6%;
+            font-size: 95%;
+        }
     }
   </style>
 </head>
@@ -197,8 +200,8 @@
   <!-- Sidebar -->
   <div class="sidebar">
     <h4>📚 Admin Truyện</h4>
-    <a href="/QLBanHang/admin.php" class="active"><i class="fa fa-home"></i> Dashboard</a>
-    <a href="/QLBanHang/admin.php?page=category&action=index"><i class="fa fa-book"></i> Quản lý danh mục</a>
+    <a href="/QLBanHang/admin.php"><i class="fa fa-home"></i> Dashboard</a>
+    <a href="/QLBanHang/admin.php?page=category&action=index" class="active"><i class="fa fa-book"></i> Quản lý danh mục</a>
     <a href="/QLBanHang/admin.php?page=genre&action=index"><i class="fa fa-book"></i> Quản lý thể loại</a>
     <a href="/QLBanHang/admin.php?page=product&action=index"><i class="fa fa-tags"></i> Sản phẩm </a>
     <a href="/QLBanHang/admin.php?page=user&action=index"><i class="fa fa-users"></i> Người dùng</a>
@@ -210,24 +213,22 @@
   <!-- Content -->
   <div class="content">
     <div class="themdanhmuc">
-      <h2>✨ Thêm mới danh mục</h2>  
+      <h2>✨ Chỉnh sửa thể loại</h2>
     </div>
 
-    <div class="form">
-      <form action="/QLBanHang/admin.php?page=category&action=create" method="POST">
-        <p>
-          <label for="name">Tên danh mục</label>
-          <input id="name" name="name" type="text" placeholder="Nhập tên danh mục..."> 
-        </p>
-        <p>
-          <label for="description">Mô tả</label>
-          <textarea id="description" name="description" rows="4" placeholder="Nhập mô tả danh mục..."></textarea>
-        </p>
-        <p>
-          <button type="submit"><i class="fa fa-plus"></i> Tạo mới</button>
-        </p>
-      </form>
-    </div>
+    <form method="POST" action="/QLBanHang/admin.php?page=genre&action=edit">
+      <input type="hidden" name="id" value="<?= $data['id'] ?>">
+      <div>
+        <label for="name">Tên danh mục</label>
+        <input type="text" name="name" value="<?= htmlspecialchars($data['genre_name']); ?>" required>
+      </div>
+      <div>
+        <label for="description">Mô tả</label>
+        <textarea name="description" rows="4"><?= htmlspecialchars($data['description']); ?></textarea>
+      </div>
+      <button type="submit"><i class="fa fa-save"></i> Cập nhật</button>
+    </form>
   </div>
+
 </body>
 </html>

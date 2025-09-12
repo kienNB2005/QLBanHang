@@ -201,7 +201,8 @@
   <div class="sidebar">
     <h4>📚 Admin Truyện</h4>
     <a href="/QLBanHang/admin.php"><i class="fa fa-home"></i> Dashboard</a>
-    <a href="/QLBanHang/admin.php?page=category&action=index" class="active"><i class="fa fa-book"></i> Quản lý Truyện</a>
+    <a href="/QLBanHang/admin.php?page=category&action=index" class="active"><i class="fa fa-book"></i> Quản lý danh mục</a>
+    <a href="/QLBanHang/admin.php?page=genre&action=index"><i class="fa fa-book"></i> Quản lý thể loại</a>
     <a href="/QLBanHang/admin.php?page=product&action=index"><i class="fa fa-tags"></i> Sản phẩm </a>
     <a href="/QLBanHang/admin.php?page=user&action=index"><i class="fa fa-users"></i> Người dùng</a>
     <a href="/QLBanHang/admin.php?page=order&action=index"><i class="fa fa-shopping-cart"></i> Đơn hàng</a>

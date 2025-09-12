@@ -3,7 +3,7 @@
 use LDAP\Result;
 
 //use LDAP\Result;
-    require_once "__DIR__ . /../../config/database.php";
+    require_once "./config/database.php";
     class Product{
         private $model;
         public function __construct(){

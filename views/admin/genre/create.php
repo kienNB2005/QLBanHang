@@ -210,11 +210,11 @@
   <!-- Content -->
   <div class="content">
     <div class="themdanhmuc">
-      <h2>✨ Thêm mới danh mục</h2>  
+      <h2>✨ Thêm mới thể loại</h2>  
     </div>
 
     <div class="form">
-      <form action="/QLBanHang/admin.php?page=category&action=create" method="POST">
+      <form action="/QLBanHang/admin.php?page=genre&action=create" method="POST">
         <p>
           <label for="name">Tên danh mục</label>
           <input id="name" name="name" type="text" placeholder="Nhập tên danh mục..."> 

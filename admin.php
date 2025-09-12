@@ -6,6 +6,7 @@ require_once "controllers/categoryController.php";
 require_once "controllers/productController.php";
 require_once "controllers/userController.php";
 require_once "controllers/orderController.php";
+require_once "controllers/genreController.php";
 //tham số truy vấn lần 1 trên url
 $page = $_GET['page'] ?? 'dashboard';
 //tham số truy vấn lần 2 trên url
@@ -115,6 +116,28 @@ switch($page) {
         switch ($action){
             case 'index':
                 $controller->index();
+                break;
+            case 'edit':
+                $controller->edit();
+                break;
+            case 'delete':
+                $controller->delete();
+                break;
+            default:
+            echo "Action Không tồn tại! ";
+        }
+        break;
+        case "genre":
+        $controller = new genreController();
+        switch ($action){
+            case 'index':
+                $controller->index();
+                break;
+            case 'displayInfo':
+                $controller->displayInfo();
+                break;
+            case 'create':
+                $controller->create();
                 break;
             case 'edit':
                 $controller->edit();

@@ -1,7 +1,7 @@
 <?php
 
 use LDAP\Result;
-require_once "__DIR__ . /../../config/database.php";
+require_once "./config/database.php";
     class User {
         private $model;
         function __construct(){
