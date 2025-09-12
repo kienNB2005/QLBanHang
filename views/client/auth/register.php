@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Comment tạm thời để test
 // if (isset($_SESSION['user'])) {
 //     header('Location: /QLBanhang/admin.php');

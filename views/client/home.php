@@ -316,32 +316,54 @@
           </div>
         </div>
 
-        <!-- Giỏ hàng -->
-        <div class="item" id="cartBtn">
-          <i class="fas fa-shopping-cart"></i>
-          <span>Giỏ hàng</span>
-          <div class="dropdown" id="cartDropdown">
-            <div class="dropdown-item">
-        <i class="fas fa-exclamation-triangle"></i> Bạn cần đăng nhập để thêm sách vào giỏ hàng
+ 
+         <?php if (isset($_SESSION['user'])): ?>
+                 <!-- Giỏ hàng -->
+            <div class="item" id="cartBtn">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Giỏ hàng</span>
+              <div class="dropdown" id="cartDropdown">
+                <div class="dropdown-item">
+            <i class="fas fa-exclamation-triangle"></i> Bạn cần đăng nhập để thêm sách vào giỏ hàng
+                </div>
+                <a href="/qlbanhang/index.php?page=client&action=displayLogin" class="dropdown-btn">Đăng nhập</a>
+              </div>
             </div>
-            <a href="login.php" class="dropdown-btn">Đăng nhập</a>
-          </div>
-        </div>
-
         <!-- Tài khoản -->
-        <div class="item" id="accountBtn">
-          <i class="fas fa-user"></i>
-          <span>Tài khoản</span>
-          <div class="dropdown" id="accountDropdown">
-            <a href="login.php" class="dropdown-item">
-        <i class="fas fa-sign-in-alt"></i> Đăng nhập
-            </a>
-            <a href="register.php" class="dropdown-item">
-        <i class="fas fa-user-plus"></i> Đăng ký
-            </a>
-          </div>
-        </div>
-
+            <div class="item" id="accountBtn">
+              <i class="fas fa-user"></i>
+              <span> <?= "Xin chào, " . $_SESSION['user']['user_name'] ?></span>
+              <div class="dropdown" id="accountDropdown">
+                <a href="/qlbanhang/index.php?page=client&action=logout" class="dropdown-item">
+                <i class="fas fa-sign-in-alt"></i> Đăng xuất
+                </a>
+              </div>
+            </div>
+          <?php else: ?>
+          <!-- Giỏ hàng -->
+              <div class="item" id="cartBtn">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Giỏ hàng</span>
+                <div class="dropdown" id="cartDropdown">
+                  <div class="dropdown-item">
+              <i class="fas fa-exclamation-triangle"></i> Bạn cần đăng nhập để thêm sách vào giỏ hàng
+                  </div>
+                  <a href="/qlbanhang/index.php?page=client&action=displayLogin" class="dropdown-btn">Đăng nhập</a>
+                </div>
+              </div>
+                <div class="item" id="accountBtn">
+                <i class="fas fa-user"></i>
+                <span>Tài khoản</span>
+                <div class="dropdown" id="accountDropdown">
+                  <a href="/qlbanhang/index.php?page=client&action=displayLogin" class="dropdown-item">
+              <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                  </a>
+                  <a href="/qlbanhang/index.php?page=client&action=displayRegister" class="dropdown-item">
+              <i class="fas fa-user-plus"></i> Đăng ký
+                  </a>
+                </div>
+              </div>
+          <?php endif; ?>
         <!-- Ngôn ngữ -->
         <select>
           <option>VN</option>

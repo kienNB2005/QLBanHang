@@ -1,3 +1,40 @@
+<?php
+// Nếu có biến $error từ controller truyền qua
+if (isset($error) && $error != "") {
+    echo "
+    <div id='messageBox'>
+        $error
+    </div>
+    <script>
+        // Ẩn sau 3 giây
+        setTimeout(() => {
+            document.getElementById('messageBox').style.display = 'none';
+        }, 3000);
+    </script>
+    <style>
+    #messageBox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #f44336; /* đỏ cảnh báo */
+        color: white;
+        padding: 20px 40px;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+        z-index: 9999;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    </style>
+    ";
+}
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -119,25 +156,15 @@
             <h1>Đăng nhập</h1>
             <p>Vui lòng nhập thông tin đăng nhập</p>
         </div>
-        
-        <?php 
-        session_start();
-        if (isset($_SESSION['error'])): ?>
-            <div class="alert">
-                <?= htmlspecialchars($_SESSION['error']); ?>
-                <?php unset($_SESSION['error']); ?>
-            </div>
-        <?php endif; ?>
-        
-        <form method="post" action="/QLBanhang/auth.php?action=login">
+        <form method="post" action="/QLBanhang/index.php?page=client&action=login">
             <div class="form-group">
                 <label for="user_name">Tên đăng nhập</label>
-                <input type="text" id="user_name" name="user_name" required autocomplete="username">
+                <input type="text" id="user_name" name="userName" required autocomplete="username">
             </div>
             
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
-                <input type="password" id="password" name="password" required autocomplete="current-password">
+                <input type="password" id="password" name="pass" required autocomplete="current-password">
             </div>
             
             <button type="submit" class="btn-login">Đăng nhập</button>

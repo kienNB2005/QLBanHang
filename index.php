@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     require_once "controllers/clientController.php";
     $page = $_GET['page'] ?? 'client';
     //tham số truy vấn lần 2 trên url
@@ -14,6 +15,18 @@
             case 'index':
                 //Gọi phương thức ra bên ngoài
                 $controller->index();
+                break;
+            case 'displayLogin':
+                $controller->displayLogin();
+                break;
+            case 'displayRegister':
+                $controller->displayRegister();
+                break;
+            case 'login':
+                $controller->login();
+                break;
+            case 'logout':
+                $controller->logout();
                 break;
             default:
             echo "Action Không tồn tại! ";
