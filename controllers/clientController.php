@@ -5,9 +5,12 @@
         private $modelCategory;
         private $modelGenre;
         function __construct(){
-            $this->modelCategory = new categoryController();
-            $this->modelGenre = new genreController();
+            $this->modelCategory = new category();
+            $this->modelGenre = new genre();
         }
         public function index(){
+            $dataCategory = $this->modelCategory->getAll();
+            $dataGenre = $this->modelGenre->getAll();
+            include "views/client/home.php";
         }
     }

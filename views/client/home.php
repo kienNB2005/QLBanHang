@@ -356,17 +356,24 @@
     <aside class="sidebar">
         <h3>Danh Mục</h3>
         <ul>
-          <li>Ngôn Tình</li>
-          <li>Hành Động</li>
-          <li>Kinh Dị</li>
-          <li>Học Đường</li>
+         <?php if (!empty($dataCategory)): ?>
+                <?php foreach ($dataCategory as $data): ?>
+                    <li><?= $data['name'];?></li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>chưa có danh mục nào</p>
+            <?php endif; ?>
         </ul>
 
         <h3>Thể Loại</h3>
         <ul>
-          <li>Manhua</li>
-          <li>Manga</li>
-          <li>Manhwa</li>
+          <?php if (!empty($dataGenre)): ?>
+                <?php foreach ($dataGenre as $data): ?>
+                    <li><?= $data['genre_name'];?></li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>chưa có thể loại nào</p>
+            <?php endif; ?>
         </ul>
 
         <h3>Độ Tuổi</h3>
