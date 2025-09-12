@@ -1,5 +1,5 @@
 <?php 
-    require './models/category.php';
+    require_once './models/category.php';
      class categoryController {
         private $categoryModel;
         
