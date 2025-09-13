@@ -160,6 +160,7 @@ if (isset($error) && $error != "") {
             <div class="form-group">
                 <label for="user_name">Tên đăng nhập</label>
                 <input type="text" id="user_name" name="userName" required autocomplete="username">
+                
             </div>
             
             <div class="form-group">
@@ -171,7 +172,7 @@ if (isset($error) && $error != "") {
         </form>
         
         <div style="text-align: center; margin-top: 20px;">
-            <p>Chưa có tài khoản? <a href="/QLBanhang/Views/auth/register.php" style="color: #667eea; text-decoration: none; font-weight: 500;">Đăng ký ngay</a></p>
+            <p>Chưa có tài khoản? <a href="/QLBanhang/index.php?page=client&action=displayRegister" style="color: #667eea; text-decoration: none; font-weight: 500;">Đăng ký ngay</a></p>
         </div>
         
         <div class="footer-text">

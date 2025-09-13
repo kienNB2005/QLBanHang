@@ -1,10 +1,40 @@
 <?php
-// Comment tạm thời để test
-// if (isset($_SESSION['user'])) {
-//     header('Location: /QLBanhang/admin.php');
-//     exit;
-// }
+if (isset($error) && $error != "") {
+    $isSuccess = str_contains($error, "thành công"); // check có phải thông báo success không
+    $bgColor = $isSuccess ? "#4CAF50" : "#f44336";   // xanh lá cho success, đỏ cho error
+    echo "
+    <div id='messageBox' style='background:$bgColor;'>
+        $error
+    </div>
+    <script>
+        setTimeout(() => {
+            document.getElementById('messageBox').style.display = 'none';
+        }, 3000);
+    </script>
+    <style>
+    #messageBox {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        padding: 20px 40px;
+        border-radius: 10px;
+        font-size: 18px;
+        text-align: center;
+        z-index: 9999;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    </style>
+    ";
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -175,28 +205,31 @@
             </div>
         <?php endif; ?>
         
-        <form method="post" action="/QLBanhang/auth.php?action=register">
+        <form method="post" action="/QLBanhang/index.php?page=client&action=register">
             <div class="form-group">
                 <label for="full_name">Họ và tên *</label>
-                <input type="text" id="full_name" name="full_name" required>
+                <input type="text" id="full_name" name="full_name" required
+                value="<?= htmlspecialchars($fullName ?? '' )  ?>">
             </div>
-            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email"
+                value="<?= htmlspecialchars($email ?? '')   ?>">
+            </div>
             <div class="form-row">
                 <div class="form-group">
                     <label for="user_name">Tên đăng nhập *</label>
-                    <input type="text" id="user_name" name="user_name" required>
+                    <input type="text" id="user_name" name="user_name" required
+                    value="<?= htmlspecialchars($userName ?? '')   ?>">
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}">
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}"
+                    value="<?= htmlspecialchars($phone ?? '')   ?>">
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email">
-            </div>
+        
             
             <div class="form-row">
                 <div class="form-group">
@@ -224,7 +257,7 @@
         </form>
         
         <div class="login-link">
-            <p>Đã có tài khoản? <a href="/QLBanhang/Views/auth/login.php">Đăng nhập ngay</a></p>
+            <p>Đã có tài khoản? <a href="/QLBanhang/index.php?page=client&action=displayLogin">Đăng nhập ngay</a></p>
         </div>
         
         <div class="footer-text">

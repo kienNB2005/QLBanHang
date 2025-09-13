@@ -231,14 +231,13 @@
       <option value="">-- Lọc theo quyền --</option>
       <option value="admin" >Admin</option>
       <option value="staff"  >staff</option>
-      <option value="customer" >user</option>
+      <option value="user" >user</option>
   </select>
 
   <!-- Nút tìm -->
   <button type="submit" class="btn btn-primary">Tìm</button>
   <a href="/QLBanHang/admin.php?page=user&action=index" class="btn">Xóa lọc</a>
 </form>
-
 
     <!-- Bảng danh mục -->
     <div class="card shadow-sm">

@@ -428,26 +428,13 @@
         </div>
 
         <div class="products">
+          <?php foreach($dataProduct as $product): ?>  
           <div class="product">
-            <img src="https://via.placeholder.com/180x220" alt="Truyện A">
-            <h4>Truyện A</h4>
-            <p>30,000đ</p>
+            <img src="<?=$product['images']?>" alt="Truyện A">
+            <h4><?=$product['name']?></h4>
+            <p><?=$product['price']?></p>
           </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/180x220" alt="Truyện B">
-            <h4>Truyện B</h4>
-            <p>45,000đ</p>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/180x220" alt="Truyện C">
-            <h4>Truyện C</h4>
-            <p>60,000đ</p>
-          </div>
-          <div class="product">
-            <img src="https://via.placeholder.com/180x220" alt="Truyện D">
-            <h4>Truyện D</h4>
-            <p>50,000đ</p>
-          </div>
+          <?php endforeach;?>
         </div>
     </main>
   </div>

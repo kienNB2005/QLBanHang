@@ -22,6 +22,9 @@
             case 'displayRegister':
                 $controller->displayRegister();
                 break;
+            case 'register':
+                $controller->register();
+                break;
             case 'login':
                 $controller->login();
                 break;

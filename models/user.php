@@ -20,7 +20,7 @@ require_once "./config/database.php";
             return $result->fetch();
         }
 
-        function store($fullName, $userName, $pass, $phone, $email, $gender, $role_id){
+        function store($fullName, $userName, $pass, $phone, $email, $gender, $role_id=3){
             $sql = "INSERT INTO users (full_name, user_name, password, phone, email, gender, role_id) VALUES(?,?,?,?,?,?,?)";
             $result = $this->model->prepare($sql);
             return $result ->execute([$fullName, $userName, $pass, $phone, $email, $gender, $role_id]);
@@ -93,6 +93,7 @@ require_once "./config/database.php";
             }
             else{
                 $result = $this ->model->prepare("select count(id) from user_role_view");
+                $result->execute();
                 return $result ->fetchColumn();
             }
             
@@ -105,6 +106,11 @@ require_once "./config/database.php";
             return $result->fetch();
         }
 
+        public function getEmail ($email){
+            $result = $this->model->prepare("select * from users where email = ?");
+            $result->execute([$email]);
+            return $result->fetch();
+        }
         
 
     }
