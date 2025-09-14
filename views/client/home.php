@@ -321,13 +321,7 @@
                  <!-- Giỏ hàng -->
             <div class="item" id="cartBtn">
               <i class="fas fa-shopping-cart"></i>
-              <span>Giỏ hàng</span>
-              <div class="dropdown" id="cartDropdown">
-                <div class="dropdown-item">
-            <i class="fas fa-exclamation-triangle"></i> Bạn cần đăng nhập để thêm sách vào giỏ hàng
-                </div>
-                <a href="/qlbanhang/index.php?page=client&action=displayLogin" class="dropdown-btn">Đăng nhập</a>
-              </div>
+              <span><a href="/qlbanhang/index.php?page=cart&action=index">Giỏ hàng</a></span>
             </div>
         <!-- Tài khoản -->
             <div class="item" id="accountBtn">
@@ -434,6 +428,13 @@
             <h4><?=$product['name']?></h4>
             <p><?=$product['price']?></p>
           </div>
+            <form action="/qlbanhang/index.php?page=cart&action=addNew" method="POST">
+              <input type="hidden" name="product_id" value="<?=$product['id']?>">
+              <input type="hidden" name="price" value="<?=$product['price']?>">
+              <button type="submit" class="add-to-cart">
+            <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+            </button>
+          </form>
           <?php endforeach;?>
         </div>
     </main>

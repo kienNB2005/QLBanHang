@@ -119,6 +119,7 @@
             if($user && password_verify($pass,$user['password'])){
                 if($user['role_id']== 1|| $user['role_id']=='2'){
                     $_SESSION['user'] = $user;
+                    
                     header("Location: admin.php?page=dashboard&action=index");
                     exit;
                 }

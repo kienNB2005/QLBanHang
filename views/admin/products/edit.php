@@ -295,8 +295,15 @@
         <input type="text" name="price" value="<?= $data['price'];?>">
       </div>
       <div>
-        <label for="name">Hình ảnh</label>
-        <input id="name" name="image" type="file">
+        <label for="image">Hình ảnh</label>
+        <input id="image" name="image" type="file">
+
+        <?php if (!empty($data['images'])): ?>
+            <div>
+                <p>Ảnh hiện tại:</p>
+                <img src="<?= $data['images']; ?>" alt="Hình ảnh" width="120">
+            </div>
+        <?php endif; ?>
       </div>
       <div>
         <label for="description">Mô tả</label>

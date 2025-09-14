@@ -3,16 +3,19 @@
     require_once './models/genre.php';
     require_once './models/user.php';
     require_once './models/product.php';
+    require_once './models/cart.php';
     class ClientController{
         private $modelCategory;
         private $modelGenre;
         private $modelUser;
         private $modelproduct;
+        private $modelCart;
         function __construct(){
             $this->modelCategory = new category();
             $this->modelGenre = new genre();
             $this->modelUser = new User();
             $this->modelproduct = new Product();
+            $this->modelCart = new Cart();
         }
         public function index(){
             $dataProduct = $this->modelproduct->getAll();
@@ -30,6 +33,7 @@
             $user = $this->modelUser->getUserName($userName);
             if ($user && password_verify($pass,$user['password'])){
                 $_SESSION['user'] = $user;
+                // $this->modelCart->mergeCart($user['id']);
                     header("Location: index.php?page=client&action=index");
                     exit;
             }
