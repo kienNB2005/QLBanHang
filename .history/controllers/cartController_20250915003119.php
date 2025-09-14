@@ -1,0 +1,79 @@
+<?php 
+    require_once './models/cart.php';
+    class CartController {
+
+        private $modelCart;
+        public function __construct(){
+            $this->modelCart = new Cart();
+        }
+
+        function index(){
+            $datas = $this->modelCart->getAll();
+            include "views/client/cart/index.php";
+        }
+        public function handleAction() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
+            $action = $_POST['action'];
+
+            switch ($action) {
+                case 'update':
+                    $productId = intval($_POST['product_id']);
+                    $quantity  = intval($_POST['quantity']);
+                    if ($quantity > 0) {
+                        $this->cartModel->updateQuantity($productId, $quantity);
+                    }
+                    break;
+
+                case 'delete':
+                    $productId = intval($_POST['product_id']);
+                    $this->cartModel->deleteItem($productId);
+                    break;
+
+                default:
+                    echo "Action không tồn tại!";
+                    break;
+            }
+
+            header("Location: index.php?page=cart&action=index");
+            exit;
+        }
+    }
+
+        function addNew (){
+            if (!isset($_SESSION['user'])) {
+            echo "Bạn phai dang nhap";
+            return;
+            }
+            $product_id = $_POST['product_id'];
+            $productCart = $this->modelCart->getProductCart($product_id);
+            if($productCart){
+                $result = $this->modelCart->add($productCart['id']);
+            }
+            else{
+                $result = $this->modelCart->store($product_id);
+            }
+            if($result){
+                echo "đã thêm đơn hàng vào giỏ thành công";
+            }
+        }
+
+        public function addOrSub() {
+            $id = $_POST['id'];
+            $op = $_POST['op'];
+
+            if($op === 'increase') {
+                $_SESSION['cart'][$id]['quantity']++;
+            } elseif($op === 'decrease') {
+                $_SESSION['cart'][$id]['quantity'] = max(1, $_SESSION['cart'][$id]['quantity']-1);
+            }
+            header("Location: index.php?page=cart&action=index");
+        }
+
+        public function delete() {
+            $id = $_POST['id'];
+            unset($_SESSION['cart'][$id]);
+            header("Location: index.php?page=cart&action=index");
+        }
+
+
+    }
