@@ -371,6 +371,10 @@ header .icons .item:hover .tooltip {
         <!-- Tài khoản -->
         <div class="item" id="accountBtn">
             <i class="fas fa-user"></i><span><?= "xin chào, ". $_SESSION['user']['user_name']?></span>
+            <div class="dropdown" id="accountDropdown">
+                <a href="/qlbanhang/index.php?page=client&action=logout" class="dropdown-item">
+                <i class="fas fa-sign-in-alt"></i> Đăng xuất</a>
+                </div>
         </div>
         <!-- Ngôn ngữ -->
         <select>

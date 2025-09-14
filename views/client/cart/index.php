@@ -246,7 +246,7 @@
         <img src="https://via.placeholder.com/150?text=🛒" alt="Empty Cart">
         <h2>Giỏ hàng của bạn đang trống!</h2>
         <p>Hãy thêm sản phẩm yêu thích để bắt đầu mua sắm.</p>
-        <a href="index.php">Tiếp tục mua sắm</a>
+        <a href="/qlbanhang/index.php?page=client&action=index">Tiếp tục mua sắm</a>
     </div>
 <?php endif; ?>
 
