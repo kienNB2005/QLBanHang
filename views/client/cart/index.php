@@ -217,10 +217,15 @@
 
             <!-- Nút tăng/giảm dùng formaction -->
             <div class="quantity-controls">
-                <button type="submit" formaction="index.php?page=cart&action=addOrSub&op=decrease&id=<?= $data['id'] ?>">-</button>
+                <!-- Nút giảm -->
+                <button type="submit" name="id" value="<?= $data['id'] ?>" formaction="index.php?page=cart&action=addOrSub">-</button>
+
                 <span><?= $data['quantity'] ?? 1 ?></span>
-                <button type="submit" formaction="index.php?page=cart&action=addOrSub&op=increase&id=<?= $data['id'] ?>">+</button>
+
+                <!-- Nút tăng -->
+                <button type="submit" name="increase" value="<?= $data['id'] ?>" formaction="index.php?page=cart&action=addOrSub">+</button>
             </div>
+
 
             <div class="item-subtotal"><?= number_format(( $data['price']*($data['quantity'] ?? 1)),0,",",".") ?> đ</div>
             <div class="delete-btn">🗑️</div>

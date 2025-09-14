@@ -4,10 +4,10 @@
         public static function connect()
         {
             $host = 'localhost';
-            $port = '3306';
+            $port = '3307';
             $dbname = 'qlbanhang';
             $user = 'root';
-            $pass = '';
+            $pass = '157359';
 
             try{
                 $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8",$user,$pass);

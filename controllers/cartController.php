@@ -31,7 +31,7 @@
         }
 
         function addOrSub (){
-            $id = $_POST['id'];
+            $id = $_POST['increase'] ?? $_POST['id'];
             if(isset($_POST['increase'])){
             $this->modelCart->add($id);
             }
