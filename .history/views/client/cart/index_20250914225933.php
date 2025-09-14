@@ -181,7 +181,7 @@
         </form>
     <?php else: ?>
         <div class="empty-cart">
-            <img src="https://via.placeholder.com/150?text=🛒" alt="Empty Cart">
+            <img src="/uploads/blulock.jpg" alt="Empty Cart">
             <h2>Giỏ hàng trống</h2>
             <p>Bạn chưa thêm sản phẩm nào.</p>
             <a href="index.php">Tiếp tục mua sắm</a>

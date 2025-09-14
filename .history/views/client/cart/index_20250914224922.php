@@ -132,7 +132,7 @@
         <div class="item"><i class="fas fa-shopping-cart"></i> Giỏ hàng</div>
         <div class="item"><i class="fas fa-user"></i>
             <?php if(isset($_SESSION['user'])): ?>
-                Xin chào, <?= htmlspecialchars($_SESSION['user']['user_name']) ?>
+                Xin chào, <?= htmlspecialchars($_SESSION['user']['username']) ?>
             <?php else: ?>
                 <a href="index.php?page=client&action=displayLogin">Đăng nhập</a>
             <?php endif; ?>
