@@ -393,8 +393,8 @@ header .icons .item:hover .tooltip {
 
 
         <div class="products">
-            <?php if (!empty($dataProduct)): ?>
-                <?php foreach ($dataProduct as $product): ?>
+            <?php if (!empty($dataProducts)): ?>
+                <?php foreach ($dataProducts as $product): ?>
                 <div class="product">
                     <img src="<?= $product['images'] ?>" alt="">
                     <h3><?= htmlspecialchars($product['name']) ?></h3>
