@@ -9,7 +9,7 @@ use LDAP\Result;
         public function __construct(){
             $this->model= Database::connect();
         }
-        public function getAll($category = "", $price = "", $genre = ""){
+        public function getAll($category = "", $price = "", $genre = "",$sortPrice="",$keyword=""){
             $sql = "SELECT * FROM getAll WHERE 1";
             $params = [];
 
@@ -28,11 +28,28 @@ use LDAP\Result;
                 $params[] = $genre;
             }
 
+                if($keyword !== "") {
+                $sql .= " AND name LIKE ?";
+                $params[] = "%$keyword%";
+            }
             $sql .= " GROUP BY name";
 
+                // Sắp xếp tăng/giảm theo giá
+            if($sortPrice === "asc"){
+                $sql .= " ORDER BY price ASC";
+            } elseif($sortPrice === "desc"){
+                $sql .= " ORDER BY price DESC";
+            }
             $stmt = $this->model->prepare($sql);
             $stmt->execute($params);
             return $stmt->fetchAll();
+        }
+
+        public function getAllById ($id){
+            $sql = "select * from getAll where product_id = ? group by name";
+            $result = $this->model->prepare($sql);
+            $result->execute([$id]);
+            return $result->fetch();
         }
 
         public function getById($id){

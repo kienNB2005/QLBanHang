@@ -16,6 +16,9 @@ switch ($page) {
             case 'index':
                 $controller->index();
                 break;
+            case 'displayProductDetail':
+                $controller->displayProductDetail();
+                break;
             case 'displayLogin':
                 $controller->displayLogin();
                 break;

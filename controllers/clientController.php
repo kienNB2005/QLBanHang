@@ -21,8 +21,10 @@
             $categoryId = isset($_GET['c']) ? $_GET['c'] : "";
             $genre      = isset($_GET['genre']) ? $_GET['genre'] : "";
             $price      = isset($_GET['price']) ? $_GET['price'] : "";
+            $sortPrice  = $_GET['sort_price'] ?? "";
+            $keyword = $_GET['keyword'] ?? '';
             // Gọi model lấy sản phẩm, truyền thêm điều kiện lọc
-            $dataProduct  = $this->modelproduct->getAll($categoryId, $price, $genre);
+            $dataProduct  = $this->modelproduct->getAll($categoryId, $price, $genre,$sortPrice,$keyword);
             $dataCategory = $this->modelCategory->getAll();
             $dataGenre    = $this->modelGenre->getAll();
             include "views/client/home.php";
@@ -30,6 +32,17 @@
         public function displayLogin(){
             include "views/client/auth/login.php";
         }
+
+        public function displayProductDetail() {
+            $id = $_GET['id'] ?? null;  // dùng null nếu không tồn tại
+            if (!$id) {
+                header("Location: /qlbanhang/index.php?page=client&action=index");
+                exit;
+            }
+            $productDetail = $this->modelproduct->getAllById($id);
+            include "views/client/productDetail/productDetail.php";
+        }
+
         public function login(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $userName = $_POST['userName'];
