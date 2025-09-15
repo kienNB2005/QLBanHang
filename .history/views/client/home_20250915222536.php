@@ -436,7 +436,7 @@ header .icons .item:hover .tooltip {
                     <form method="post" action="/qlbanhang/index.php?page=cart&action=addNew">
                         <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
                         <input type="hidden" name="price" value="<?= $product['price'] ?>">
-                        <button type="submit" class="add-to-cart"><i class="fas fa-cart-plus"></i> Thêm giỏ hàng</button>
+                        <button type="submit" class="add-to-cart"><i class="fas fa-cart-plus">Thêm giỏ hàng</i></button>
                         <a href="/qlbanhang/index.php?page=cart&action=index" class="view-cart">
                             <i class="fas fa-shopping-cart"></i>
                         </a>

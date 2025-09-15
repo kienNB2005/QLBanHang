@@ -57,5 +57,15 @@ class CartController {
         header("Location: index.php?page=cart&action=index");
         exit;
     }
+    public function remove() {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        if (isset($_SESSION['cart'][$id])) {
+            unset($_SESSION['cart'][$id]);
+        }
+    }
+    header("Location: index.php?controller=cart&action=index");
+    exit();
+}
 
 }

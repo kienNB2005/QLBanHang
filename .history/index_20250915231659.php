@@ -4,7 +4,6 @@ session_start();
 require_once "controllers/clientController.php";
 require_once "controllers/cartController.php";
 require_once "controllers/paymentController.php";
-require_once "controllers/clientOrderController.php";
 
 $page = $_GET['page'] ?? 'client';
 $action = $_GET['action'] ?? 'index';
@@ -58,26 +57,6 @@ switch ($page) {
                 break;
         }
         break;
-    case 'order':
-    $controller = new ClientOrderController();
-    switch ($action) {
-        case 'checkout':
-            $controller->checkout();
-            break;
-        case 'process':
-            $controller->process();
-            break;
-        case 'info':
-            $controller->info();
-            break;
-        case 'save':
-            $controller->save();
-            break;
-        default:
-            echo "Action không tồn tại!";
-    }
-    break;
-
 
     // case 'payment':
     //     $controller = new PaymentController();
@@ -100,5 +79,14 @@ switch ($page) {
     default:
         echo "404 trang không tìm thấy!";
         break;
+        
+    if ($page == 'order') {
+        $controller = new ClientOrderController();
+        if ($action == 'checkout') {
+            $controller->checkout();
+        } elseif ($action == 'process') {
+            $controller->process();
+        }
+    }
 
 }

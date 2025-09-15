@@ -59,25 +59,19 @@ switch ($page) {
         }
         break;
     case 'order':
-    $controller = new ClientOrderController();
-    switch ($action) {
-        case 'checkout':
-            $controller->checkout();
-            break;
-        case 'process':
-            $controller->process();
-            break;
-        case 'info':
-            $controller->info();
-            break;
-        case 'save':
-            $controller->save();
-            break;
-        default:
-            echo "Action không tồn tại!";
-    }
-    break;
-
+        $controller = new ClientOrderController();
+        switch ($action) {
+            case 'checkout':
+                $controller->checkout();
+                break;
+            case 'process':
+                $controller->process();
+                break;
+            default:
+                echo "Action Không tồn tại!";
+                break;
+        }
+        break;
 
     // case 'payment':
     //     $controller = new PaymentController();
