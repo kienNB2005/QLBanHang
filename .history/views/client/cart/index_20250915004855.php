@@ -238,17 +238,10 @@
                 <button type="submit" class="checkout-btn">Thanh toán ngay</button>
             </form>
         </div>
-    </div>
-</form>
-<?php else: ?>
-    <div class="empty-cart">
-        <img src="https://via.placeholder.com/150?text=🛒" alt="Empty Cart">
-        <h2>Giỏ hàng của bạn đang trống!</h2>
-        <p>Hãy thêm sản phẩm yêu thích để bắt đầu mua sắm.</p>
-        <a href="/qlbanhang/index.php?page=client&action=index">Tiếp tục mua sắm</a>
-    </div>
-<?php endif; ?>
 
+    <?php else: ?>
+        <p>🛍️ Giỏ hàng của bạn đang trống. <a href="index.php">Tiếp tục mua sắm</a></p>
+    <?php endif; ?>
 </div>
 
 </body>

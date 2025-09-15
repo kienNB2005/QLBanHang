@@ -18,9 +18,13 @@
             $this->modelCart = new Cart();
         }
         public function index(){
-            $dataProduct = $this->modelproduct->getAll();
+            $categoryId = isset($_GET['c']) ? $_GET['c'] : "";
+            $genre      = isset($_GET['genre']) ? $_GET['genre'] : "";
+            $price      = isset($_GET['price']) ? $_GET['price'] : "";
+            // Gọi model lấy sản phẩm, truyền thêm điều kiện lọc
+            $dataProduct  = $this->modelproduct->getAll($categoryId, $price, $genre);
             $dataCategory = $this->modelCategory->getAll();
-            $dataGenre = $this->modelGenre->getAll();
+            $dataGenre    = $this->modelGenre->getAll();
             include "views/client/home.php";
         }
         public function displayLogin(){

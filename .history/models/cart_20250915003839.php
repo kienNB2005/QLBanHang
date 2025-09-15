@@ -10,18 +10,15 @@ class Cart {
 
     // Lấy toàn bộ giỏ hàng của user hiện tại
     public function getAll(){
-            $result = $this->model->prepare("SELECT * FROM qlbanhang.cart_product where user_id = ?");
-            $result->execute([$_SESSION['user']['id']]);
-            return $result->fetchAll();
+        $sql = "SELECT c.*, p.name, p.price, p.images 
+                FROM carts c
+                JOIN products p ON c.product_id = p.id
+                WHERE c.user_id = ?";
+        $result = $this->model->prepare($sql);
+        $result->execute([$_SESSION['user']['id']]);
+        return $result->fetchAll();
     }
 
-    public function countCartByUser($userId) {
-        $sql = "SELECT SUM(quantity) as total FROM carts WHERE user_id = ?";
-        $stmt = $this->model->prepare($sql);
-        $stmt->execute([$userId]);
-        $row = $stmt->fetch();
-        return $row ? (int)$row['total'] : 0;
-    }
     // Thêm sản phẩm vào giỏ
     function store($product_id, $quantity = 1){
         $sql = "INSERT INTO carts (product_id, user_id, quantity) VALUES (?,?,?)";

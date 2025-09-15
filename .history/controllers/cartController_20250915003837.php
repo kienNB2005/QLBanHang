@@ -10,31 +10,9 @@ class CartController {
 
     // Trang giỏ hàng
     function index(){
-        if(!isset($_SESSION['user'])){
-            echo "bạn phải đăng nhập";
-            return;
-        }
         $datas = $this->modelCart->getAll();
         include "views/client/cart/index.php";
     }
-
-    function addNew (){
-        if(!isset($_SESSION['user'])){
-            echo "bạn phải đăng nhập";
-            return;
-        }
-            $product_id = $_POST['product_id'];
-            $productCart = $this->modelCart->getProductCart($product_id);
-            if($productCart){
-                $result = $this->modelCart-> add($productCart['id']);
-            }
-            else{
-                $result = $this->modelCart->store($product_id);
-            }
-            if($result){
-                echo "đã thêm đơn hàng vào giỏ thành công";
-            }
-        }
 
     // Tăng/giảm số lượng
     public function addOrSub() {

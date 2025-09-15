@@ -156,48 +156,51 @@ header .icons .item:hover .tooltip {
 /* ----------------- CONTAINER ----------------- */
 .container {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     margin: 20px;
     gap: 20px;
-    align-items: center;
 }
 
-/* ----------------- DANH MỤC ICON ----------------- */
-.category-icons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-.category-icons a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+/* ----------------- SIDEBAR ----------------- */
+.sidebar {
+    width: 250px;
     background: #ffe6f2;
-    padding: 10px 15px;
-    border-radius: 8px;
-    color: #ff4d94;
-    font-weight: 500;
-    transition: all 0.3s;
+    border: 1px solid #ffcce0;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    flex-shrink: 0;
 }
-.category-icons a:hover {
+.sidebar h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #ff4d94;
+    border-bottom: 1px solid #ffcce0;
+    padding-bottom: 5px;
+}
+.sidebar ul { list-style: none; padding: 0; margin: 0 0 20px 0; }
+.sidebar li {
+    padding: 10px;
+    border-bottom: 1px solid #ffd9e6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+.sidebar li:hover {
     background: #ffd1e6;
-    transform: translateY(-3px);
+    transform: translateX(5px);
 }
 
 /* ----------------- CONTENT ----------------- */
 .content {
     flex: 1;
-    background: #fff; /* nền trắng */
+    background: #fff0f5;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 80px); /* kéo dài ra hết trang, trừ header khoảng 80px */
 }
-
 
 /* Filter */
 .filter-section {
@@ -228,7 +231,6 @@ header .icons .item:hover .tooltip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    justify-items: center;
 }
 .product {
     border: 1px solid #ffcce0;
@@ -238,8 +240,6 @@ header .icons .item:hover .tooltip {
     background: #fff0f5;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
-    width: 100%;
-    max-width: 250px;
 }
 .product:hover {
     transform: scale(1.05);
@@ -276,12 +276,16 @@ header .icons .item:hover .tooltip {
     margin-bottom: 10px;
     transition: background 0.2s;
 }
-.product .add-to-cart:hover { background: #ff4d94; }
+.product .add-to-cart:hover {
+    background: #ff4d94;
+}
 
 /* ----------------- RESPONSIVE ----------------- */
 @media (max-width: 1200px) { .products { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 992px) { .products { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) {
+    .container { flex-direction: column; }
+    .sidebar { width: 100%; margin-bottom: 20px; }
     .products { grid-template-columns: 1fr; }
     header { flex-direction: column; align-items: stretch; }
     header .search-bar { margin: 10px 0; }
@@ -293,9 +297,6 @@ header .icons .item:hover .tooltip {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-
-
 </style>
 </head>
 <body>
@@ -312,6 +313,7 @@ header .icons .item:hover .tooltip {
         <button type="submit" class="btn btn-primary">Tìm</button>
     </div>
     <div class="icons">
+        <!-- Thông báo -->
         <div class="item" id="notifyBtn">
             <i class="fas fa-bell"></i><span>Thông báo</span>
             <div class="tooltip">Xem thông báo</div>
@@ -319,6 +321,7 @@ header .icons .item:hover .tooltip {
                 <div class="dropdown-item"><i class="fas fa-info-circle"></i> Bạn chưa đăng nhập</div>
             </div>
         </div>
+        <!-- Giỏ hàng -->
         <div class="item" id="cartBtn">
             <i class="fas fa-shopping-cart"></i><span>Giỏ hàng</span>
             <div class="cart-badge" id="cartCount">3</div>
@@ -328,6 +331,7 @@ header .icons .item:hover .tooltip {
                 <a href="/qlbanhang/index.php?page=client&action=displayLogin" class="dropdown-btn">Đăng nhập</a>
             </div>
         </div>
+        <!-- Tài khoản -->
         <div class="item" id="accountBtn">
             <i class="fas fa-user"></i><span>Tài khoản</span>
             <div class="tooltip">Quản lý tài khoản</div>
@@ -336,6 +340,7 @@ header .icons .item:hover .tooltip {
                 <a href="/qlbanhang/index.php?page=client&action=displayRegister" class="dropdown-item"><i class="fas fa-user-plus"></i> Đăng ký</a>
             </div>
         </div>
+        <!-- Ngôn ngữ -->
         <select>
             <option>VN</option>
             <option>EN</option>
@@ -353,21 +358,21 @@ header .icons .item:hover .tooltip {
         <button type="submit" class="btn btn-primary">Tìm</button>
     </div>
     <div class="icons">
+        <!-- Thông báo -->
         <div class="item" id="notifyBtn">
             <i class="fas fa-bell"></i><span>Thông báo</span>
             <div class="tooltip">Xem thông báo</div>
             <div class="dropdown"></div>
         </div>
+        <!-- Giỏ hàng -->
         <div class="item" id="cartBtn">
             <a href="/qlbanhang/index.php?page=cart&action=index"><i class="fas fa-shopping-cart"></i><span>Giỏ hàng</span></a>
         </div>
+        <!-- Tài khoản -->
         <div class="item" id="accountBtn">
             <i class="fas fa-user"></i><span><?= "xin chào, ". $_SESSION['user']['user_name']?></span>
-            <div class="dropdown" id="accountDropdown">
-                <a href="/qlbanhang/index.php?page=client&action=logout" class="dropdown-item">
-                <i class="fas fa-sign-in-alt"></i> Đăng xuất</a>
-                </div>
         </div>
+        <!-- Ngôn ngữ -->
         <select>
             <option>VN</option>
             <option>EN</option>
@@ -378,54 +383,59 @@ header .icons .item:hover .tooltip {
 
 <!-- CONTAINER -->
 <div class="container">
-    <!-- DANH MỤC ICON + TEXT -->
-    <div class="category-icons">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h3>Danh Mục</h3>
         <?php if (!empty($dataCategory)): ?>
-            <a href="/qlbanhang/index.php?page=client&action=index">
-                    <i class="fas fa-folder-open"></i> Tất cả
-                </a>
+        <ul>
             <?php foreach ($dataCategory as $data): ?>
-                <a href="/qlbanhang/index.php?page=client&action=index&c=<?= $data['id'];?>">
-                    <i class="fas fa-folder-open"></i> <?= htmlspecialchars($data['name']); ?>
-                </a>
+                <li><?= $data['name'];?></li>
             <?php endforeach; ?>
+        </ul>
         <?php else: ?>
             <p>Chưa có danh mục nào</p>
         <?php endif; ?>
-    </div>
+
+        <h3>Thể Loại</h3>
+        <?php if (!empty($dataGenre)): ?>
+        <ul>
+            <?php foreach ($dataGenre as $data): ?>
+                <li><?= $data['genre_name'];?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+            <p>Chưa có thể loại nào</p>
+        <?php endif; ?>
+    </aside>
 
     <!-- CONTENT -->
-     
-
-     
     <main class="content">
-        <form action="/qlbanhang/index.php">
-            <input type="hidden" name="page" value="client">
-            <input type="hidden" name="action" value="index">
-            <input type="hidden" name="c" value="<?= htmlspecialchars($_GET['c'] ?? '') ?>"> <!-- giữ category hiện tại -->
-            <div class="filter-section">
-            <select id="filterCategory" name="price">
-                <option value="">Tất cả giá</option>
-                <option value="100000" <?= (isset($_GET['price']) && $_GET['price']=='100000') ? 'selected' : '' ?>>Dưới 100k</option>
-                <option value="200000" <?= (isset($_GET['price']) && $_GET['price']=='200000') ? 'selected' : '' ?>>Dưới 200k</option>
+        <div class="filter-section">
+            <select id="filterCategory">
+                <option value="">Danh Mục</option>
+                <?php if (!empty($dataCategory)): ?>
+                    <?php foreach ($dataCategory as $category): ?>
+                        <option value="<?= htmlspecialchars($category['name']) ?>">
+                            <?= htmlspecialchars($category['name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </select>
-            
-            <select id="filterGenre" name="genre">
+
+            <select id="filterGenre">
                 <option value="">Thể Loại</option>
                 <?php if (!empty($dataGenre)): ?>
                     <?php foreach ($dataGenre as $genre): ?>
-                        <option value="<?= htmlspecialchars($genre['genre_name']) ?>"
-                            <?= (isset($_GET['genre']) && $_GET['genre']==$genre['genre_name']) ? 'selected' : '' ?>>
+                        <option value="<?= htmlspecialchars($genre['genre_name']) ?>">
                             <?= htmlspecialchars($genre['genre_name']) ?>
                         </option>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </select>
 
-            <button type="submit" >Lọc</button>
+            <button id="filterBtn">Lọc</button>
         </div>
-        </form>
-        
+
         <div class="products">
             <?php if (!empty($dataProduct)): ?>
                 <?php foreach ($dataProduct as $product): ?>
@@ -433,11 +443,26 @@ header .icons .item:hover .tooltip {
                     <img src="<?= $product['images'] ?>" alt="">
                     <h3><?= htmlspecialchars($product['name']) ?></h3>
                     <p>Giá: <?= number_format($product['price']) ?> VNĐ</p>
+
+                    <!-- Form thêm vào giỏ hàng -->
                     <form method="post" action="/qlbanhang/index.php?page=cart&action=addNew">
-                        <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+                        <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
                         <input type="hidden" name="price" value="<?= $product['price'] ?>">
-                        <button type="submit" class="add-to-cart"><i class="fas fa-cart-plus"></i></button>
-                        <a href="/qlbanhang/index.php?page=cart&action=index" class="view-cart">
+                        <button type="submit" class="add-to-cart" title="Thêm vào giỏ hàng">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+
+                        <!-- Nút xem giỏ hàng -->
+                        <a href="/qlbanhang/index.php?page=cart&action=index" class="view-cart" title="Xem giỏ hàng" style="
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 8px 12px;
+                            background: #ff4d94;
+                            color: #fff;
+                            border-radius: 5px;
+                            transition: background 0.2s;
+                        ">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </form>
@@ -449,23 +474,20 @@ header .icons .item:hover .tooltip {
         </div>
     </main>
 </div>
-
 <div id="toast" style="
-    display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #333;
+    background: #ff80b3;
     color: #fff;
-    padding: 15px 20px;
-    border-radius: 8px;
+    padding: 15px 25px;
+    border-radius: 10px;
     font-size: 16px;
-    max-width: 300px;
-    text-align: center;
-    word-wrap: break-word;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    z-index: 9999;"></div>
+    display: none;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+"></div>
 <script>
 // Dropdown toggle
 const items = document.querySelectorAll('.item');
@@ -483,44 +505,49 @@ document.addEventListener('click', () => {
         if(dropdown) dropdown.classList.remove('active');
     });
 });
+const filterBtn = document.getElementById('filterBtn');
+const filterCategory = document.getElementById('filterCategory');
+const filterGenre = document.getElementById('filterGenre');
+const products = document.querySelectorAll('.product');
 
-// ✅ Xử lý thêm giỏ hàng
-document.querySelectorAll(".product form").forEach(form => {
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
+filterBtn.addEventListener('click', () => {
+    const selectedCategory = filterCategory.value;
+    const selectedGenre = filterGenre.value;
 
-        const formData = new FormData(this);
+    products.forEach(product => {
+        const productCategory = product.getAttribute('data-category');
+        const productGenre = product.getAttribute('data-genre');
 
-        fetch(this.action, {
-            method: "POST",
-            body: formData
-        })
-        .then(res => res.text())
-        .then(text => {
-            const toast = document.getElementById('toast');
-            toast.textContent = text;
+        let show = true;
+        if (selectedCategory && productCategory !== selectedCategory) show = false;
+        if (selectedGenre && productGenre !== selectedGenre) show = false;
 
-            if (text.includes("bạn phải đăng nhập")) {
-                toast.style.backgroundColor = "red";
-            } else {
-                toast.style.backgroundColor = "green";
-
-                // cập nhật số lượng giỏ hàng
-                const badge = document.getElementById("cartCount");
-                if (badge) {
-                    let current = parseInt(badge.textContent) || 0;
-                    badge.textContent = current + 1;
-                }
-            }
-
-            toast.style.display = 'block';
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2000);
-        })
-        .catch(err => console.error("Lỗi thêm giỏ hàng:", err));
+        product.style.display = show ? 'block' : 'none';
     });
 });
+
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+    btn.addEventListener('click', function(e){
+        e.preventDefault();
+
+        const form = this.closest('form');
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData
+        }).then(res => res.text())
+          .then(data => {
+              const toast = document.getElementById('toast');
+              toast.textContent = "Đã thêm đơn hàng vào giỏ thành công";
+              toast.style.display = 'block';
+              setTimeout(() => {
+                  toast.style.display = 'none';
+              }, 2000);
+          });
+    });
+});
+
 </script>
 </body>
 </html>

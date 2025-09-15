@@ -9,10 +9,32 @@ use LDAP\Result;
         public function __construct(){
             $this->model= Database::connect();
         }
-        public function getAll(){
-            $result = $this->model->query("select * from products");
-            return $result->fetchAll();
+        public function getAll($category = "", $price = "", $genre = ""){
+            $sql = "SELECT * FROM getAll WHERE 1";
+            $params = [];
+
+            if($category !== ""){
+                $sql .= " AND category_id = ?";
+                $params[] = $category;
+            }
+
+            if($price !== ""){
+                $sql .= " AND price <= ?";
+                $params[] = (float)$price;
+            }
+
+            if($genre !== ""){
+                $sql .= " AND genre_name = ?";
+                $params[] = $genre;
+            }
+
+            $sql .= " GROUP BY name";
+
+            $stmt = $this->model->prepare($sql);
+            $stmt->execute($params);
+            return $stmt->fetchAll();
         }
+
         public function getById($id){
             $sql = "select * from products where id = ? ";
             $result = $this->model->prepare($sql);

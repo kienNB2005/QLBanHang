@@ -43,9 +43,6 @@ switch ($page) {
             case 'index':
                 $controller->index();
                 break;
-            case 'addNew':
-                $controller->addNew();
-                break;
             case 'addOrSub':
                 $controller->addOrSub();
                 break;
