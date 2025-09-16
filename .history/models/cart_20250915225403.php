@@ -58,12 +58,6 @@ class Cart {
         return $stmt->execute([$quantity, $productId, $_SESSION['user']['id']]);
     }
 
-        public function updateQuantityFromProductDetail($productId, $quantity){
-        $sql = "UPDATE carts SET quantity = quantity + ? WHERE product_id = ? AND user_id = ?";
-        $stmt = $this->model->prepare($sql);
-        return $stmt->execute([$quantity, $productId, $_SESSION['user']['id']]);
-    }
-
     // Xóa sản phẩm khỏi giỏ
     // Xóa sản phẩm khỏi giỏ theo ID của carts
     public function deleteItem($id){

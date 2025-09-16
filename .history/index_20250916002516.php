@@ -17,9 +17,6 @@ switch ($page) {
             case 'index':
                 $controller->index();
                 break;
-            case 'displayProductDetail':
-                $controller->displayProductDetail();
-                break;
             case 'displayLogin':
                 $controller->displayLogin();
                 break;
@@ -55,9 +52,6 @@ switch ($page) {
                 break;
             case 'delete':              // form nên submit ?page=cart&action=delete
                 $controller->delete();  // gọi method delete() trong controller
-                break;
-            case 'updateQuantityFromProductDetail':
-                $controller->updateQuantityFromProductDetail();
                 break;
             default:
                 echo "Action Không tồn tại!";

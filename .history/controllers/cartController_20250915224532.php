@@ -58,11 +58,4 @@ class CartController {
         exit;
     }
 
-    public function updateQuantityFromProductDetail(){
-        $product_id = $_POST['product_id'];
-        $quantity = $_POST['quantity'];
-        $this->modelCart->updateQuantityFromProductDetail($product_id,$quantity);
-        header("Location: index.php?page=client&action=displayProductDetail&id=".$product_id);
-        exit;
-    }
 }

@@ -17,9 +17,6 @@ switch ($page) {
             case 'index':
                 $controller->index();
                 break;
-            case 'displayProductDetail':
-                $controller->displayProductDetail();
-                break;
             case 'displayLogin':
                 $controller->displayLogin();
                 break;
@@ -56,34 +53,25 @@ switch ($page) {
             case 'delete':              // form nên submit ?page=cart&action=delete
                 $controller->delete();  // gọi method delete() trong controller
                 break;
-            case 'updateQuantityFromProductDetail':
-                $controller->updateQuantityFromProductDetail();
-                break;
             default:
                 echo "Action Không tồn tại!";
                 break;
         }
         break;
     case 'order':
-    $controller = new ClientOrderController();
-    switch ($action) {
-        case 'checkout':
-            $controller->checkout();
-            break;
-        case 'process':
-            $controller->process();
-            break;
-        case 'info':
-            $controller->info();
-            break;
-        case 'save':
-            $controller->save();
-            break;
-        default:
-            echo "Action không tồn tại!";
-    }
-    break;
-
+        $controller = new ClientOrderController();
+        switch ($action) {
+            case 'checkout':
+                $controller->checkout();
+                break;
+            case 'process':
+                $controller->process();
+                break;
+            default:
+                echo "Action Không tồn tại!";
+                break;
+        }
+        break;
 
     // case 'payment':
     //     $controller = new PaymentController();

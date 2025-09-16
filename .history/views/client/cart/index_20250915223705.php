@@ -216,9 +216,6 @@
     <?php if(!empty($datas)): ?>
         <?php foreach ($datas as $data): ?>
             <div class="cart-item" data-id="<?= $data['id'] ?>" data-price="<?= $data['price'] ?>">
-                <!-- Checkbox -->
-                <input type="checkbox" class="check-item" name="selected_products[]" value="<?= $data['id'] ?>" checked>
-
                 <img src="<?= $data['images'] ?>" alt="<?= $data['name'] ?>">
 
                 <div class="item-info">
@@ -232,9 +229,9 @@
                     <button type="button" class="increase"><i class="fas fa-plus"></i></button>
                     
                     <!-- Xóa -->
-                    <form method="post" style="display:inline;" action="index.php?page=cart&action=delete">
+                    <form method="post" action="index.php?page=cart&action=delete">
                         <input type="hidden" name="id" value="<?= $data['id'] ?>">
-                        <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')" class="delete-btn"><i class="fas fa-trash"></i></button>
+                        <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
                     </form>
                 </div>
             </div>
@@ -243,15 +240,13 @@
         <div class="cart-summary">
             <div class="total">
                 Tổng tiền: 
-                <span id="total-price">0</span> đ
+                <span id="total-price">
+                    <?= number_format(array_sum(array_map(fn($d)=>$d['price']*($d['quantity']??1), $datas)),0,",",".") ?>
+                </span> đ
             </div>
-              <form method="post" action="index.php?page=order&action=process">
-                    <?php foreach ($datas as $data): ?>
-                        <input type="checkbox" name="selected_products[]" value="<?= $data['id'] ?>" checked hidden>
-                    <?php endforeach; ?>
-                    <button type="submit" class="checkout-btn">Thanh toán ngay</button>
-                </form>
-
+            <form method="post" action="index.php?page=cart&action=checkout">
+                <button type="submit" class="checkout-btn">Thanh toán ngay</button>
+            </form>
         </div>
     <?php else: ?>
         <div class="empty-cart">
@@ -269,22 +264,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const updateTotal = () => {
         let total = 0;
         document.querySelectorAll(".cart-item").forEach(item => {
-            const checkbox = item.querySelector(".check-item");
-            if (checkbox && checkbox.checked) {
-                const price = parseInt(item.dataset.price);
-                const quantity = parseInt(item.querySelector(".quantity").innerText);
-                total += price * quantity;
-            }
+            const price = parseInt(item.dataset.price);
+            const quantity = parseInt(item.querySelector(".quantity").innerText);
+            total += price * quantity;
         });
         document.getElementById("total-price").innerText = total.toLocaleString("vi-VN");
     };
 
-    // Checkbox click
-    document.querySelectorAll(".check-item").forEach(cb => {
-        cb.addEventListener("change", updateTotal);
-    });
-
-    // Nút tăng giảm
     document.querySelectorAll(".increase").forEach(btn => {
         btn.addEventListener("click", function() {
             const item = this.closest(".cart-item");
@@ -305,9 +291,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
-    // ✅ Gọi ngay khi load trang
-    updateTotal();
 });
 </script>
 

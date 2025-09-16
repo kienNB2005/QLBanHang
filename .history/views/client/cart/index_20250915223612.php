@@ -107,6 +107,10 @@
         gap: 8px;
     }
 
+    .actions form {
+        display: inline;
+    }
+
     .actions button {
         background: #ff80b3;
         color: #fff;
@@ -215,10 +219,7 @@
 
     <?php if(!empty($datas)): ?>
         <?php foreach ($datas as $data): ?>
-            <div class="cart-item" data-id="<?= $data['id'] ?>" data-price="<?= $data['price'] ?>">
-                <!-- Checkbox -->
-                <input type="checkbox" class="check-item" name="selected_products[]" value="<?= $data['id'] ?>" checked>
-
+            <div class="cart-item">
                 <img src="<?= $data['images'] ?>" alt="<?= $data['name'] ?>">
 
                 <div class="item-info">
@@ -227,14 +228,26 @@
                 </div>
 
                 <div class="actions">
-                    <button type="button" class="decrease"><i class="fas fa-minus"></i></button>
-                    <span class="quantity"><?= $data['quantity'] ?></span>
-                    <button type="button" class="increase"><i class="fas fa-plus"></i></button>
-                    
-                    <!-- Xóa -->
-                    <form method="post" style="display:inline;" action="index.php?page=cart&action=delete">
+                    <!-- Giảm -->
+                    <form method="post" action="index.php?page=cart&action=addOrSub">
                         <input type="hidden" name="id" value="<?= $data['id'] ?>">
-                        <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')" class="delete-btn"><i class="fas fa-trash"></i></button>
+                        <input type="hidden" name="op" value="decrease">
+                        <button type="submit"><i class="fas fa-minus"></i></button>
+                    </form>
+
+                    <span class="quantity"><?= $data['quantity'] ?></span>
+
+                    <!-- Tăng -->
+                    <form method="post" action="index.php?page=cart&action=addOrSub">
+                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                        <input type="hidden" name="op" value="increase">
+                        <button type="submit"><i class="fas fa-plus"></i></button>
+                    </form>
+
+                    <!-- Xóa -->
+                    <form method="post" action="index.php?page=cart&action=delete">
+                        <input type="hidden" name="id" value="<?= $data['id'] ?>">
+                        <button type="submit" class="delete-btn"><i class="fas fa-trash"></i></button>
                     </form>
                 </div>
             </div>
@@ -243,15 +256,11 @@
         <div class="cart-summary">
             <div class="total">
                 Tổng tiền: 
-                <span id="total-price">0</span> đ
+                <?= number_format(array_sum(array_map(fn($d)=>$d['price']*($d['quantity']??1), $datas)),0,",",".") ?> đ
             </div>
-              <form method="post" action="index.php?page=order&action=process">
-                    <?php foreach ($datas as $data): ?>
-                        <input type="checkbox" name="selected_products[]" value="<?= $data['id'] ?>" checked hidden>
-                    <?php endforeach; ?>
-                    <button type="submit" class="checkout-btn">Thanh toán ngay</button>
-                </form>
-
+            <form method="post" action="index.php?page=cart&action=checkout">
+                <button type="submit" class="checkout-btn">Thanh toán ngay</button>
+            </form>
         </div>
     <?php else: ?>
         <div class="empty-cart">
@@ -263,53 +272,6 @@
     <?php endif; ?>
 
 </div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const updateTotal = () => {
-        let total = 0;
-        document.querySelectorAll(".cart-item").forEach(item => {
-            const checkbox = item.querySelector(".check-item");
-            if (checkbox && checkbox.checked) {
-                const price = parseInt(item.dataset.price);
-                const quantity = parseInt(item.querySelector(".quantity").innerText);
-                total += price * quantity;
-            }
-        });
-        document.getElementById("total-price").innerText = total.toLocaleString("vi-VN");
-    };
-
-    // Checkbox click
-    document.querySelectorAll(".check-item").forEach(cb => {
-        cb.addEventListener("change", updateTotal);
-    });
-
-    // Nút tăng giảm
-    document.querySelectorAll(".increase").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const item = this.closest(".cart-item");
-            const qtyEl = item.querySelector(".quantity");
-            qtyEl.innerText = parseInt(qtyEl.innerText) + 1;
-            updateTotal();
-        });
-    });
-
-    document.querySelectorAll(".decrease").forEach(btn => {
-        btn.addEventListener("click", function() {
-            const item = this.closest(".cart-item");
-            const qtyEl = item.querySelector(".quantity");
-            let current = parseInt(qtyEl.innerText);
-            if (current > 1) {
-                qtyEl.innerText = current - 1;
-                updateTotal();
-            }
-        });
-    });
-
-    // ✅ Gọi ngay khi load trang
-    updateTotal();
-});
-</script>
 
 </body>
 </html>

@@ -49,7 +49,7 @@ use LDAP\Result;
             $sql = "select * from getAll where product_id = ? group by name";
             $result = $this->model->prepare($sql);
             $result->execute([$id]);
-            return $result->fetch();
+            return $result->fetchAll();
         }
 
         public function getById($id){
@@ -71,11 +71,20 @@ use LDAP\Result;
         }
 
         public function delete ($id){
-            $sql = "delete from products where id = ?";
-            $result = $this->model->prepare($sql);
-            $result2 = $this->model->prepare("delete from genre_product where product_id = ?");
-            $result2 -> execute([$id]);
-            return $result->execute([$id]);
+            // 1. Xóa các liên kết genre_product
+            $sql1 = "DELETE FROM genre_product WHERE product_id = ?";
+            $stmt1 = $this->model->prepare($sql1);
+            $stmt1->execute([$id]);
+
+            // 2. Xóa tất cả cart chứa sản phẩm
+            $sql2 = "DELETE FROM carts WHERE product_id = ?";
+            $stmt2 = $this->model->prepare($sql2);
+            $stmt2->execute([$id]);
+
+            // 3. Xóa sản phẩm
+            $sql3 = "DELETE FROM products WHERE id = ?";
+            $stmt3 = $this->model->prepare($sql3);
+            return $stmt3->execute([$id]);
         }
         public function deleteGenre_product ($id){
             $result = $this->model->prepare("delete from genre_product where product_id = ?");

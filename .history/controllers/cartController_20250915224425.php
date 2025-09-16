@@ -57,12 +57,15 @@ class CartController {
         header("Location: index.php?page=cart&action=index");
         exit;
     }
-
-    public function updateQuantityFromProductDetail(){
-        $product_id = $_POST['product_id'];
-        $quantity = $_POST['quantity'];
-        $this->modelCart->updateQuantityFromProductDetail($product_id,$quantity);
-        header("Location: index.php?page=client&action=displayProductDetail&id=".$product_id);
-        exit;
+    public function remove() {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        if (isset($_SESSION['cart'][$id])) {
+            unset($_SESSION['cart'][$id]);
+        }
     }
+    header("Location: index.php?controller=cart&action=index");
+    exit();
+}
+
 }

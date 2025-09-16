@@ -305,9 +305,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
-    // ✅ Gọi ngay khi load trang
-    updateTotal();
 });
 </script>
 

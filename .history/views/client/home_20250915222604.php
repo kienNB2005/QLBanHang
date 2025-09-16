@@ -306,18 +306,10 @@ header .icons .item:hover .tooltip {
     <div class="logo">📚 TruyệnTranh</div>
 
     <div class="search-bar">
-    <form action="/qlbanhang/index.php" method="get" style="flex:1; display:flex;">
-        <input type="hidden" name="page" value="client">
-        <input type="hidden" name="action" value="index">
-        <input type="hidden" name="c" value="<?= htmlspecialchars($_GET['c'] ?? '') ?>">
-        <input type="hidden" name="price" value="<?= htmlspecialchars($_GET['price'] ?? '') ?>">
-        <input type="hidden" name="genre" value="<?= htmlspecialchars($_GET['genre'] ?? '') ?>">
-        <input type="hidden" name="sort_price" value="<?= htmlspecialchars($_GET['sort_price'] ?? '') ?>">
-
-        <input type="text" name="keyword" placeholder="🔍 Tìm kiếm truyện..." 
+        <input type="text" name="keyword" class="form-control me-2" 
+            placeholder="🔍 Tìm kiếm truyện..." 
             value="<?= isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : '' ?>">
-        <button type="submit">Tìm</button>
-    </form>
+        <button type="submit" class="btn btn-primary">Tìm</button>
     </div>
     <div class="icons">
         <div class="item" id="notifyBtn">
@@ -355,18 +347,10 @@ header .icons .item:hover .tooltip {
     <div class="logo">📚 TruyệnTranh</div>
 
     <div class="search-bar">
-    <form action="/qlbanhang/index.php" method="get" style="flex:1; display:flex;">
-        <input type="hidden" name="page" value="client">
-        <input type="hidden" name="action" value="index">
-        <input type="hidden" name="c" value="<?= htmlspecialchars($_GET['c'] ?? '') ?>">
-        <input type="hidden" name="price" value="<?= htmlspecialchars($_GET['price'] ?? '') ?>">
-        <input type="hidden" name="genre" value="<?= htmlspecialchars($_GET['genre'] ?? '') ?>">
-        <input type="hidden" name="sort_price" value="<?= htmlspecialchars($_GET['sort_price'] ?? '') ?>">
-
-        <input type="text" name="keyword" placeholder="🔍 Tìm kiếm truyện..." 
+        <input type="text" name="keyword" class="form-control me-2" 
+            placeholder="🔍 Tìm kiếm truyện..." 
             value="<?= isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : '' ?>">
-        <button type="submit">Tìm</button>
-    </form>
+        <button type="submit" class="btn btn-primary">Tìm</button>
     </div>
     <div class="icons">
         <div class="item" id="notifyBtn">
@@ -438,11 +422,6 @@ header .icons .item:hover .tooltip {
                 <?php endif; ?>
             </select>
 
-                <select name="sort_price">
-                <option value="">Sắp xếp theo giá</option>
-                <option value="asc" <?= (isset($_GET['sort_price']) && $_GET['sort_price']=='asc') ? 'selected' : '' ?>>Giá tăng dần</option>
-                <option value="desc" <?= (isset($_GET['sort_price']) && $_GET['sort_price']=='desc') ? 'selected' : '' ?>>Giá giảm dần</option>
-                </select>
             <button type="submit" >Lọc</button>
         </div>
         </form>
@@ -451,10 +430,9 @@ header .icons .item:hover .tooltip {
             <?php if (!empty($dataProduct)): ?>
                 <?php foreach ($dataProduct as $product): ?>
                 <div class="product" data-category="<?= htmlspecialchars($product['category_name'] ?? '') ?>" data-genre="<?= htmlspecialchars($product['genre_name'] ?? '') ?>">
-                        <a href="/qlbanhang/index.php?page=client&action=displayProductDetail&id=<?= $product['product_id'] ?>">
-                            <img src="<?= $product['images'] ?>" alt="">
-                            <h3><?= htmlspecialchars($product['name']) ?></h3>
-                        </a>
+                    <img src="<?= $product['images'] ?>" alt="">
+                    <h3><?= htmlspecialchars($product['name']) ?></h3>
+                    <p>Giá: <?= number_format($product['price']) ?> VNĐ</p>
                     <form method="post" action="/qlbanhang/index.php?page=cart&action=addNew">
                         <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
                         <input type="hidden" name="price" value="<?= $product['price'] ?>">

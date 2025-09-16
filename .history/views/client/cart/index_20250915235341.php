@@ -217,7 +217,7 @@
         <?php foreach ($datas as $data): ?>
             <div class="cart-item" data-id="<?= $data['id'] ?>" data-price="<?= $data['price'] ?>">
                 <!-- Checkbox -->
-                <input type="checkbox" class="check-item" name="selected_products[]" value="<?= $data['id'] ?>" checked>
+                <input type="checkbox" class="check-item">
 
                 <img src="<?= $data['images'] ?>" alt="<?= $data['name'] ?>">
 
@@ -245,12 +245,11 @@
                 Tổng tiền: 
                 <span id="total-price">0</span> đ
             </div>
-              <form method="post" action="index.php?page=order&action=process">
-                    <?php foreach ($datas as $data): ?>
-                        <input type="checkbox" name="selected_products[]" value="<?= $data['id'] ?>" checked hidden>
-                    <?php endforeach; ?>
-                    <button type="submit" class="checkout-btn">Thanh toán ngay</button>
-                </form>
+            <form method="get" action="index.php">
+                <input type="hidden" name="page" value="order">
+                <input type="hidden" name="action" value="checkout">
+                <button type="submit" class="checkout-btn">Thanh toán ngay</button>
+            </form>
 
         </div>
     <?php else: ?>
@@ -305,9 +304,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
-    // ✅ Gọi ngay khi load trang
-    updateTotal();
 });
 </script>
 

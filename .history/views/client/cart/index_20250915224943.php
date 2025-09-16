@@ -217,7 +217,7 @@
         <?php foreach ($datas as $data): ?>
             <div class="cart-item" data-id="<?= $data['id'] ?>" data-price="<?= $data['price'] ?>">
                 <!-- Checkbox -->
-                <input type="checkbox" class="check-item" name="selected_products[]" value="<?= $data['id'] ?>" checked>
+                <input type="checkbox" class="check-item">
 
                 <img src="<?= $data['images'] ?>" alt="<?= $data['name'] ?>">
 
@@ -232,7 +232,7 @@
                     <button type="button" class="increase"><i class="fas fa-plus"></i></button>
                     
                     <!-- Xóa -->
-                    <form method="post" style="display:inline;" action="index.php?page=cart&action=delete">
+                    <form method="post" action="index.php?page=cart&action=delete" style="display:inline;>
                         <input type="hidden" name="id" value="<?= $data['id'] ?>">
                         <button type="submit" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')" class="delete-btn"><i class="fas fa-trash"></i></button>
                     </form>
@@ -245,13 +245,9 @@
                 Tổng tiền: 
                 <span id="total-price">0</span> đ
             </div>
-              <form method="post" action="index.php?page=order&action=process">
-                    <?php foreach ($datas as $data): ?>
-                        <input type="checkbox" name="selected_products[]" value="<?= $data['id'] ?>" checked hidden>
-                    <?php endforeach; ?>
-                    <button type="submit" class="checkout-btn">Thanh toán ngay</button>
-                </form>
-
+            <form method="post" action="index.php?page=cart&action=checkout">
+                <button type="submit" class="checkout-btn">Thanh toán ngay</button>
+            </form>
         </div>
     <?php else: ?>
         <div class="empty-cart">
@@ -305,9 +301,6 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
-    // ✅ Gọi ngay khi load trang
-    updateTotal();
 });
 </script>
 

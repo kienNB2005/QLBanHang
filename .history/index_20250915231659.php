@@ -4,7 +4,6 @@ session_start();
 require_once "controllers/clientController.php";
 require_once "controllers/cartController.php";
 require_once "controllers/paymentController.php";
-require_once "controllers/clientOrderController.php";
 
 $page = $_GET['page'] ?? 'client';
 $action = $_GET['action'] ?? 'index';
@@ -16,9 +15,6 @@ switch ($page) {
         switch ($action) {
             case 'index':
                 $controller->index();
-                break;
-            case 'displayProductDetail':
-                $controller->displayProductDetail();
                 break;
             case 'displayLogin':
                 $controller->displayLogin();
@@ -56,34 +52,11 @@ switch ($page) {
             case 'delete':              // form nên submit ?page=cart&action=delete
                 $controller->delete();  // gọi method delete() trong controller
                 break;
-            case 'updateQuantityFromProductDetail':
-                $controller->updateQuantityFromProductDetail();
-                break;
             default:
                 echo "Action Không tồn tại!";
                 break;
         }
         break;
-    case 'order':
-    $controller = new ClientOrderController();
-    switch ($action) {
-        case 'checkout':
-            $controller->checkout();
-            break;
-        case 'process':
-            $controller->process();
-            break;
-        case 'info':
-            $controller->info();
-            break;
-        case 'save':
-            $controller->save();
-            break;
-        default:
-            echo "Action không tồn tại!";
-    }
-    break;
-
 
     // case 'payment':
     //     $controller = new PaymentController();
@@ -106,5 +79,14 @@ switch ($page) {
     default:
         echo "404 trang không tìm thấy!";
         break;
+        
+    if ($page == 'order') {
+        $controller = new ClientOrderController();
+        if ($action == 'checkout') {
+            $controller->checkout();
+        } elseif ($action == 'process') {
+            $controller->process();
+        }
+    }
 
 }

@@ -95,7 +95,7 @@
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $id = $_POST['id'];
                 $result = $this->modelProducts->delete($id);
-
+                
                 if ($result) {
                     echo "Xóa thành công <a href='/QLBanHang/admin.php?page=product&action=index'>Danh sách</a>";
                     die;
