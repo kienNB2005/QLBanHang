@@ -454,6 +454,7 @@ header .icons .item:hover .tooltip {
                         <a href="/qlbanhang/index.php?page=client&action=displayProductDetail&id=<?= $product['product_id'] ?>">
                             <img src="<?= $product['images'] ?>" alt="">
                             <h3><?= htmlspecialchars($product['name']) ?></h3>
+                            <h3><?=number_format($product['price'],0,',','.')?>₫</h3>
                         </a>
                     <form method="post" action="/qlbanhang/index.php?page=cart&action=addNew">
                         <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">

@@ -61,8 +61,16 @@ class CartController {
     public function updateQuantityFromProductDetail(){
         $product_id = $_POST['product_id'];
         $quantity = $_POST['quantity'];
+        $productCart = $this->modelCart->getProductCart($product_id);
+        if($productCart){
         $this->modelCart->updateQuantityFromProductDetail($product_id,$quantity);
         header("Location: index.php?page=client&action=displayProductDetail&id=".$product_id);
         exit;
+        }
+        else{
+            $this->modelCart->store($product_id,$quantity);
+            header("Location: index.php?page=client&action=displayProductDetail&id=".$product_id);
+            exit;
+        }
     }
 }

@@ -46,7 +46,7 @@ use LDAP\Result;
         }
 
         public function getAllById ($id){
-            $sql = "select * from getAll where product_id = ? group by name";
+            $sql = "select * from getAll where product_id = ?";
             $result = $this->model->prepare($sql);
             $result->execute([$id]);
             return $result->fetchAll();

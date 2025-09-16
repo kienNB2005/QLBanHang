@@ -69,10 +69,10 @@ nav a:hover { opacity:0.8; }
 <body>
 
 <header>
-<h1>Shop Demo</h1>
+<h1>📚 TruyệnTranh</h1>
 <nav>
-<a href="/">Trang chủ</a>
-<a href="/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
+<a href="/qlbanhang/index.php?page=client&action=index">Trang chủ</a>
+<a href="/qlbanhang/index.php?page=cart&action=index"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a>
 </nav>
 </header>
 
@@ -90,7 +90,10 @@ nav a:hover { opacity:0.8; }
         <h1><?=$productDetail[0]['name']?></h1>
         <div class="meta">
             <p>Danh mục: <strong><?=$productDetail[0]['category_name']?></strong></p>
-            <p>Thể loại: <?php $genres=array_column($productDetail,'genre_name'); echo implode(', ',$genres);?></p>
+            <p>Thể loại: <strong><?php foreach($productDetail as $pr): ?>
+                         <?=$pr['genre_name']?>,
+                        <?php endforeach;?></strong> 
+            </p>
         </div>
         <div class="price"><?=number_format($productDetail[0]['price'],0,',','.')?>₫</div>
 
